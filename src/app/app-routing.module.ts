@@ -1,7 +1,16 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'payment',
+      loadChildren: () => import('./payment/payment.module').then(m => m.PaymentModule) 
+  },
+  {
+    path: '',
+    redirectTo: 'payment',
+    pathMatch: 'full'
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

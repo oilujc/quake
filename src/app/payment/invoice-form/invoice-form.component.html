@@ -1,0 +1,114 @@
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <h3>New Invoice</h3>
+        </div>
+    </div>
+    <form [formGroup]="invoiceForm" class="card-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="form-group col-8">
+                    <label for="payment_method">Payment Method</label>
+                    <select id="payment_method" formControlName="payment_method" name="payment_method" class="form-control">
+                        <option value="" selected> ---- </option>
+                        <option *ngFor="let payment of paymentMethods; let first = first" [ngValue]="payment.value">{{payment.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-4">
+                    <label for="fee">Fee</label>
+                    <input id="fee" pattern="^(\d*\.)?\d+$" formControlName="fee" class="form-control" type="text" name="fee">
+                </div>
+                <div class="col-12" *ngIf="invoiceForm.controls.fee.touched && invoiceForm.controls.fee.errors != null">
+                    <div class="alert alert-danger">
+                        <span *ngIf="invoiceForm.controls.fee.errors.pattern">Fee: Only numbers</span>
+                        <span *ngIf="invoiceForm.controls.fee.errors.required">Fee: Field required</span>
+                    </div>
+                </div>
+                <div class="col-12" *ngIf="invoiceForm.controls.payment_method.touched && invoiceForm.controls.payment_method.errors != null">
+                    <div class="alert alert-danger">
+                        <span *ngIf="invoiceForm.controls.payment_method.errors.required">Payment Method: Field required</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-8">
+                    <label for="artist">Artist Name</label>
+                    <select name="artist" id="artist" formControlName="artist" class="form-control">
+                      <option value="" selected> ---- </option>
+                      <option *ngFor="let art of artists; let first = first" [ngValue]="art.value">{{art.name}}</option>
+                    </select>
+                </div>
+                <div class="form-group col-4">
+                    <label for="amount">Amount</label>
+                    <input id="amount" pattern="^(\d*\.)?\d+$" formControlName="amount" class="form-control" type="text" placeholder="" name="amount">
+                </div>
+                <div class="col-12" *ngIf="invoiceForm.controls.artist.touched && invoiceForm.controls.artist.errors != null">
+                    <div class="alert alert-danger">
+                        <span *ngIf="invoiceForm.controls.artist.errors">Artist: Field Required</span>
+                    </div>
+                </div>
+                <div class="col-12" *ngIf="invoiceForm.controls.amount.touched && invoiceForm.controls.amount.errors != null">
+                    <div class="alert alert-danger">
+                        <span *ngIf="invoiceForm.controls.amount.errors.pattern">Amount: Only numbers</span>
+                        <span *ngIf="invoiceForm.controls.amount.errors.required">Amount: Field required</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-4">
+                    <label for="agent">Agent</label>
+                    <input id="agent" pattern="^(\d*\.)?\d+$" formControlName="agent" class="form-control" type="text" name="agent">
+                </div>
+                <div class="form-group col-4">
+                    <label for="admin">Admin</label>
+                    <input id="admin" pattern="^(\d*\.)?\d+$" formControlName="admin" class="form-control" type="text" name="admin">
+                </div>
+                <div class="form-group col-4">
+                    <label for="quake">Quake</label>
+                    <input id="quake" pattern="^(\d*\.)?\d+$" formControlName="quake" class="form-control" type="text" name="quake">
+                </div>
+                <div class="col-12" *ngIf="invoiceForm.controls.agent.touched && invoiceForm.controls.agent.errors != null">
+                    <div class="alert alert-danger">
+                        <span *ngIf="invoiceForm.controls.agent.errors.required">Agent: Field required</span>
+                        <span *ngIf="invoiceForm.controls.agent.errors.pattern">Agent: Only numbers</span>
+                    </div>
+                </div>
+                <div class="col-12" *ngIf="invoiceForm.controls.admin.touched && invoiceForm.controls.admin.errors != null">
+                    <div class="alert alert-danger">
+                        <span *ngIf="invoiceForm.controls.admin.errors.required">Admin: Field required</span>
+                        <span class="invoiceForm.controls.admin.errors.pattern">Admin: Only numbers</span>
+                    </div>
+                </div>
+                <div class="col-12" *ngIf="invoiceForm.controls.quake.touched && invoiceForm.controls.quake.errors != null">
+                    <div class="alert alert-danger">
+                        <span *ngIf="invoiceForm.controls.quake.errors.required">Quake: Field required</span>
+                        <span *ngIf="invoiceForm.controls.quake.errors.pattern">Quake: Only numbers</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-inline col-12">
+                    <label for="subtotal" class="col-3">Subtotal</label>
+                    <input id="subtotal" pattern="^(\d*\.)?\d+$" formControlName="subtotal" class="form-control col-9" type="text" placeholder="5.4">
+                </div>
+                <div class="col-12 mt-2" *ngIf="invoiceForm.controls.subtotal.touched && invoiceForm.controls.subtotal.errors != null">
+                    <div class="alert alert-danger">
+                        <span *ngIf="invoiceForm.controls.subtotal.errors.required">Subtotal: Field required</span>
+                        <span *ngIf="invoiceForm.controls.subtotal.errors.pattern">Subtotal: Only numbers</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row my-4">
+                <div class="col-12">
+                    <h4>Total: 32$</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-12">
+                    <button type="submit" class="btn btn-primary btn-block">Create Invoice</button>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
